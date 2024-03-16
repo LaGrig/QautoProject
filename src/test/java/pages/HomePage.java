@@ -1,5 +1,6 @@
 package pages;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -92,6 +93,7 @@ public class HomePage extends Web {
     public static final String webUrl = "https://guest:welcome2qauto@qauto.forstudy.space/";
 
     public void goToHomePage(){
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get(webUrl);
     }
