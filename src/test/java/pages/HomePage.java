@@ -6,6 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
 import java.util.List;
@@ -90,20 +91,16 @@ public class HomePage extends Web {
 
 
     //Other
-    public static final String webUrl = "https://guest:welcome2qauto@qauto.forstudy.space/";
+//    public static final String webUrl = "https://guest:welcome2qauto@qauto.forstudy.space/";
 
-    public void goToHomePage(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.get(webUrl);
-    }
+
 
     public String getCurrentWebAddress() {
-        String currUrl = driver.getCurrentUrl();
-        return currUrl;
+        return driver.getCurrentUrl();
     }
 
-    public boolean elementsOnPageChecker() {
+    public boolean elementsOnPageChecker() throws InterruptedException {
+        Thread.sleep(5000);
         try {
             driver.findElement(By.xpath(guestLoginButton));
             driver.findElement(By.xpath(userLoginButton));

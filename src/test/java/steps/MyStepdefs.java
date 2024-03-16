@@ -1,27 +1,29 @@
 package steps;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.After;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.Assert;
-import pages.HomePage;
-import pages.UserPage;
-import pages.Web;
+import pages.Pages;
 
-import java.util.List;
+public class MyStepdefs extends Pages {
 
-import static pages.Web.driver;
+    @Before
+    public void chromeSetup() {
+        web.setup();
+    }
 
-public class MyStepdefs{
-    HomePage homePage = new HomePage();
-    UserPage userPage = new UserPage();
+    @After
+    public void chromeDriverQuit(){
+        web.closeBrowser();
+    }
 
     @Given("I navigate to the Home page")
     public void iNavigateToTheHomePage() {
-        homePage.goToHomePage();
+        web.goToHomePage();
     }
 
     @Then("Check current URL")
@@ -31,7 +33,7 @@ public class MyStepdefs{
     }
 
     @Then("Check all page element on page are present")
-    public void checkAllPageElementOnPageArePresent() {
+    public void checkAllPageElementOnPageArePresent() throws InterruptedException {
         homePage.elementsOnPageChecker();
     }
 
@@ -45,11 +47,5 @@ public class MyStepdefs{
         userPage.loginAsGuestAndCheckPresentTabs();
     }
 
-    @Then("Close browser")
-    public void closeBrowser() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 }
 
