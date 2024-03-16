@@ -1,2 +1,7 @@
-package pages;public class Pages {
+package pages;
+
+public class Pages{
+    //HomePage homePage = new HomePage();
+
+
 }
