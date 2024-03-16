@@ -7,8 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.List;
 
 public class HomePage extends Web {
@@ -99,8 +102,8 @@ public class HomePage extends Web {
         return driver.getCurrentUrl();
     }
 
-    public boolean elementsOnPageChecker() throws InterruptedException {
-        Thread.sleep(5000);
+
+    public boolean elementsOnPageChecker(){
         try {
             driver.findElement(By.xpath(guestLoginButton));
             driver.findElement(By.xpath(userLoginButton));

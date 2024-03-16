@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public class UserPage extends Web{
 
     //Locators
     //Page objects locators
-    private final String loggedInAsGuestNotifier = "//* [@class='header_bar' and text()='Logged in as guest, any changes will be lost!']";
+    public static final String loggedInAsGuestNotifier = "//* [@class='header_bar' and text()='Logged in as guest, any changes will be lost!']";
     private final String sidebarGarageLink = "//a[@class='btn btn-white btn-sidebar sidebar_btn -active' and @href='/panel/garage']";
     private final String headerGarageLink = "//a[@class='btn header-link -active' and @href='/panel/garage']";
     private final String sidebarExpensesLink = "//a[@class='btn btn-white btn-sidebar sidebar_btn' and @href='/panel/expenses']";
@@ -51,6 +52,7 @@ public class UserPage extends Web{
 
 
     public void loginAsGuestAndCheckPresentTabs(){
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(loggedInAsGuestNotifier)));
         Assert.assertTrue(driver.findElement(By.xpath(getHeaderGarageLink())).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath(getSidebarGarageLink())).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath(getSidebarExpensesLink())).isDisplayed());
