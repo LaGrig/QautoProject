@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.Assert;
 import pages.Pages;
+import pages.Web;
 
 public class MyStepdefs extends Pages {
 
@@ -26,10 +27,11 @@ public class MyStepdefs extends Pages {
         web.goToHomePage();
     }
 
-    @Then("Check current URL")
+    @Then("Check if current URL is HomePage URL")
     public void checkCurrentURL() {
         String currURL = homePage.getCurrentWebAddress();
-        Assert.assertEquals(currURL, "https://guest:welcome2qauto@qauto.forstudy.space/");
+        //Assert.assertEquals(currURL, "https://guest:welcome2qauto@qauto.forstudy.space/");
+        web.checkCurrentUrl(Web.homePageUrl);
     }
 
     @Then("Check all page element on page are present")
@@ -42,10 +44,14 @@ public class MyStepdefs extends Pages {
         homePage.guestLoginButtonClick();
     }
 
-    @When("Check if I logged in as Guest")
+    @Then("Check if I logged in as Guest")
     public void checkIfILoggedInAsGuest() {
         userPage.loginAsGuestAndCheckPresentTabs();
     }
 
+    @When("Home page is loaded")
+    public void homePageIsLoaded() {
+
+    }
 }
 

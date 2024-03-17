@@ -96,13 +96,6 @@ public class HomePage extends Web {
     //Other
 //    public static final String webUrl = "https://guest:welcome2qauto@qauto.forstudy.space/";
 
-
-
-    public String getCurrentWebAddress() {
-        return driver.getCurrentUrl();
-    }
-
-
     public boolean elementsOnPageChecker(){
         try {
             driver.findElement(By.xpath(guestLoginButton));
