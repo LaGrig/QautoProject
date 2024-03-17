@@ -1,18 +1,14 @@
 package pages;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.time.Duration;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Random;
 
 public class HomePage extends Web {
 
@@ -92,9 +88,11 @@ public class HomePage extends Web {
     public String getSignUpRePasswordInput() { return signUpRePasswordInput;}
     public String getRegisterButton() { return registerButton;}
 
+    // User predefined credentials
+    private final String userEmail = "greg@gmail.com";
+    private final String userPassword = "Qwerty123";
 
     //Other
-//    public static final String webUrl = "https://guest:welcome2qauto@qauto.forstudy.space/";
 
     public boolean elementsOnPageChecker(){
         try {
@@ -121,5 +119,60 @@ public class HomePage extends Web {
     }
     public void guestLoginButtonClick(){
         driver.findElement(By.xpath(guestLoginButton)).click();
+    }
+
+    public void signUpButtonClick(){
+        driver.findElement(By.xpath(signUpButton)).click();
+    }
+
+    public void loginButtonClick(){
+        driver.findElement(By.xpath(toLoginButton)).click();
+    }
+
+    public void registerButtonClick(){
+        driver.findElement(By.xpath(getRegisterButton())).click();
+    }
+
+
+    public void signInFormFilling(){
+        driver.findElement(By.xpath(getUserLoginButton())).click();
+        driver.findElement(By.xpath(getSignInEmailField())).sendKeys(userEmail);
+        driver.findElement(By.xpath(getSignInPasswordField())).sendKeys(userPassword);
+    }
+
+
+    private static final String NAMES = "src/test/resources/NamesAndLastnames/Names.csv";
+    private static final String LASTNAMES = "src/test/resources/NamesAndLastnames/Lastnames.csv";
+        public static String getRandomNameFromFile(String fileName) throws Exception {
+            List<String> lines = Files.readAllLines(Paths.get(fileName));
+            Random random = new Random();
+            return lines.get(random.nextInt(lines.size()));
+        }
+
+    public String newUserName() throws Exception {
+        return getRandomNameFromFile(NAMES);
+    }
+
+    public String newUserLastame() throws Exception {
+        return getRandomNameFromFile(LASTNAMES);
+    }
+    public void newUserSignUpFormFillingIn() throws Exception {
+        long timestamp = System.currentTimeMillis();
+
+        String password = "Qwerty123";
+        driver.findElement(By.xpath(getSignUpButton())).click();
+        driver.findElement(By.xpath(getSignUpNameInput())).sendKeys(newUserName());
+        driver.findElement(By.xpath(getSignUpLastnameInput())).sendKeys(newUserLastame());
+        driver.findElement(By.xpath(getSignUpEmailInput())).sendKeys(newUserName() + timestamp + "@gmail.com");
+        driver.findElement(By.xpath(getSignUpPasswordInput())).sendKeys(password);
+        driver.findElement(By.xpath(getSignUpRePasswordInput())).sendKeys(password);
+    }
+
+    //НАДО БУДЕТ ПО ХОРОШЕМУ ПЕРЕНЕСТИ В ДРУГУЮ СТРАНИЦУ ЭТОТ МЕТОД
+    // - ПРОВЕРКА НА ТРАНИЦЕ ПРОФИЛЯ НАЛИЧИЯ ИМЕНИ И ФАМИЛИИ
+    public void userProfileNameAndLastnameChecker() throws Exception {
+        String expectedName = newUserName() + " " + newUserLastame();
+        WebElement element = driver.findElement(By.xpath("//p[@class='profile_name display-4' and text()='" + expectedName + "']"));
+        Assert.assertEquals(expectedName, element);
     }
 }

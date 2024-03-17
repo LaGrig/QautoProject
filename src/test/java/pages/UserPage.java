@@ -28,8 +28,6 @@ public class UserPage extends Web{
 
     // Getters
 
-    public String getUserEmail() { return userEmail; }
-    public String getUserPassword() { return userPassword; }
     public String getRegisterMessage() { return registerMessage; }
     public String getLoginMessage() { return loginMessage;  }
     public String getLoggedInAsGuestNotifier() { return loggedInAsGuestNotifier; }
@@ -45,26 +43,36 @@ public class UserPage extends Web{
     public String getLogOutDropdownButton() { return logOutDropdownButton;}
     public String getSidebarSettingsLink() { return sidebarSettingsLink;}
 
-
-    // User predefined credentials
-    private final String userEmail = "greg@gmail.com";
-    private final String userPassword = "Qwerty123";
-
-
     public void loginAsGuestAndCheckPresentTabs(){
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(loggedInAsGuestNotifier)));
         Assert.assertTrue(driver.findElement(By.xpath(getHeaderGarageLink())).isDisplayed());
-//        Assert.assertTrue(driver.findElement(By.xpath(getSidebarGarageLink())).isDisplayed());
-//        Assert.assertTrue(driver.findElement(By.xpath(getSidebarExpensesLink())).isDisplayed());
-//        Assert.assertTrue(driver.findElement(By.xpath(getHeaderExpensesLink())).isDisplayed());
-//        Assert.assertTrue(driver.findElement(By.xpath(getSidebarInstructionsLink())).isDisplayed());
-//        Assert.assertTrue(driver.findElement(By.xpath(getHeaderInstructionsLink())).isDisplayed());
-//        Assert.assertTrue(driver.findElement(By.xpath(getLogOutButton())).isDisplayed());
-//
-//        List<WebElement> settingsLinks = driver.findElements(By.xpath(getSidebarSettingsLink()));
-//        Assert.assertTrue(settingsLinks.isEmpty());
-//
-//        List<WebElement> profileLinks = driver.findElements(By.xpath(getSidebarProfileLink()));
-//        Assert.assertTrue(profileLinks.isEmpty());
+        Assert.assertTrue(driver.findElement(By.xpath(getSidebarGarageLink())).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(getSidebarExpensesLink())).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(getHeaderExpensesLink())).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(getSidebarInstructionsLink())).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(getHeaderInstructionsLink())).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(getLogOutButton())).isDisplayed());
+
+        List<WebElement> settingsLinks = driver.findElements(By.xpath(getSidebarSettingsLink()));
+        Assert.assertTrue(settingsLinks.isEmpty());
+
+        List<WebElement> profileLinks = driver.findElements(By.xpath(getSidebarProfileLink()));
+        Assert.assertTrue(profileLinks.isEmpty());
+    }
+
+    public void loginAsUserAndCheckPresentTabs(){
+        Assert.assertTrue(driver.findElement(By.xpath(getSidebarGarageLink())).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(getSidebarExpensesLink())).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(getHeaderExpensesLink())).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(getSidebarInstructionsLink())).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(getHeaderInstructionsLink())).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(getLogOutButton())).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(getSidebarSettingsLink())).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(getSidebarProfileLink())).isDisplayed());
+    }
+
+    public void logout(){
+        driver.findElement(By.xpath(getHeaderProfileLink())).click();
+        driver.findElement(By.xpath(getLogOutButton())).click();
     }
 }

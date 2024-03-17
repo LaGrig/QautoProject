@@ -14,21 +14,21 @@ public class Web {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
     public static final String homePageUrl = "https://guest:welcome2qauto@qauto.forstudy.space/";
+    public static final String garagePageUrl = "https://guest:welcome2qauto@qauto.forstudy.space/panel/garage";
 
     public String getCurrentWebAddress() {
         return driver.getCurrentUrl();
     }
 
-    public boolean checkCurrentUrl (String urlToCheck){
+    public void checkCurrentUrl (String urlToCheck){
         String url = driver.getCurrentUrl();
         Assert.assertEquals(url, urlToCheck);
-        return true;
     }
 
     public void setup() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
         driver = new ChromeDriver(options);
     }
 

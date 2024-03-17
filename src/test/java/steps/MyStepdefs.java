@@ -2,11 +2,10 @@ package steps;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.testng.Assert;
 import pages.Pages;
 import pages.Web;
 
@@ -29,13 +28,11 @@ public class MyStepdefs extends Pages {
 
     @Then("Check if current URL is HomePage URL")
     public void checkCurrentURL() {
-        String currURL = homePage.getCurrentWebAddress();
-        //Assert.assertEquals(currURL, "https://guest:welcome2qauto@qauto.forstudy.space/");
         web.checkCurrentUrl(Web.homePageUrl);
     }
 
-    @Then("Check all page element on page are present")
-    public void checkAllPageElementOnPageArePresent() throws InterruptedException {
+    @Then("Check all page element on Home page are present")
+    public void checkAllPageElementOnHomePageArePresent() throws InterruptedException {
         homePage.elementsOnPageChecker();
     }
 
@@ -49,9 +46,57 @@ public class MyStepdefs extends Pages {
         userPage.loginAsGuestAndCheckPresentTabs();
     }
 
-    @When("Home page is loaded")
-    public void homePageIsLoaded() {
+    @And("Check if I Signed in as Registered User")
+    public void checkIfISignedInAsRegisteredUser() {
+        userPage.loginAsUserAndCheckPresentTabs();
+    }
 
+    @When("Click on Sign in button")
+    public void clickOnSignInButton() {
+        homePage.signUpButtonClick();
+    }
+
+    @And("Fill in User login credentials")
+    public void fillInUserLoginCredentials() {
+        homePage.signInFormFilling();
+    }
+
+    @Then("Submit Sign in form")
+    public void submitSignInForm() {
+        homePage.loginButtonClick();
+    }
+
+    @Then("User logout and Home Page Url check")
+    public void userLogout() {
+        userPage.logout();
+        homePage.checkCurrentUrl(Web.homePageUrl);
+    }
+
+    @When("Click on SingUp button")
+    public void clickOnSingUpButton() {
+        homePage.signUpButtonClick();
+
+    }
+
+    @And("Fill in New user credentials")
+    public void fillInNewUserCredentials() throws Exception {
+        homePage.newUserSignUpFormFillingIn();
+    }
+
+    @And("Click Register button")
+    public void clickRegisterButton() {
+        homePage.registerButtonClick();
+    }
+
+    @Then("Check if current URL is UserPage-Garage URL")
+    public void checkIfCurrentURLIsUserPageGarageURL() {
+        homePage.checkCurrentUrl(Web.garagePageUrl);
+    }
+
+    @And("Profile User name is present on Profile page")
+    public void profileUserNameIsPresentOnProfilePage() throws Exception {
+        profilePage.gotoProfilePage();
+        homePage.userProfileNameAndLastnameChecker();
     }
 }
 
