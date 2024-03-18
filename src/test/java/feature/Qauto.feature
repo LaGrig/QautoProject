@@ -8,7 +8,7 @@ Feature: Homepage feature
     Given I navigate to the Home page
     Then Check all page element on Home page are present
 
-      #Не работает проверка элементов на странице
+      #Не работает проверка элементов на странице в headless
   Scenario: 3 Check if login and logout as Guest is possible
     Given I navigate to the Home page
     When Click on Guest Login button
@@ -21,7 +21,7 @@ Feature: Homepage feature
     When Click on Sign in button
     And Fill in User login credentials
     Then Submit Sign in form
-    And Check if I Signed in as Registered User
+    And Check if I logged in as User
     Then User logout and Home Page Url check
 
 

@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import pages.Pages;
 import pages.Web;
 
@@ -47,7 +48,7 @@ public class MyStepdefs extends Pages {
     }
 
     @And("Check if I Signed in as Registered User")
-    public void checkIfISignedInAsRegisteredUser() throws InterruptedException {
+    public void checkIfISignedInAsRegisteredUser(){
         userPage.loginAsUserAndCheckPresentTabs();
     }
 
@@ -67,8 +68,9 @@ public class MyStepdefs extends Pages {
     }
 
     @Then("User logout and Home Page Url check")
-    public void userLogout() {
+    public void userLogout() throws InterruptedException {
         userPage.logout();
+        Thread.sleep(2000);
         homePage.checkCurrentUrl(Web.homePageUrl);
     }
 
@@ -102,6 +104,11 @@ public class MyStepdefs extends Pages {
     public void profileUserNameIsPresentOnProfilePage() throws Exception {
         profilePage.gotoProfilePage();
         homePage.userProfileNameAndLastnameChecker();
+    }
+
+    @And("Check if I logged in as User")
+    public void checkIfILoggedInAsUser() throws InterruptedException {
+        userPage.userProfileNameCheck();
     }
 }
 
