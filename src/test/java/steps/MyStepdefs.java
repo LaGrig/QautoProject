@@ -42,18 +42,18 @@ public class MyStepdefs extends Pages {
     }
 
     @Then("Check if I logged in as Guest")
-    public void checkIfILoggedInAsGuest() {
+    public void checkIfILoggedInAsGuest() throws InterruptedException {
         userPage.loginAsGuestAndCheckPresentTabs();
     }
 
     @And("Check if I Signed in as Registered User")
-    public void checkIfISignedInAsRegisteredUser() {
+    public void checkIfISignedInAsRegisteredUser() throws InterruptedException {
         userPage.loginAsUserAndCheckPresentTabs();
     }
 
     @When("Click on Sign in button")
     public void clickOnSignInButton() {
-        homePage.signUpButtonClick();
+        homePage.signInButtonClick();
     }
 
     @And("Fill in User login credentials")
@@ -80,6 +80,11 @@ public class MyStepdefs extends Pages {
 
     @And("Fill in New user credentials")
     public void fillInNewUserCredentials() throws Exception {
+        homePage.newUserSignUpFormFillingIn();
+    }
+
+    @And("Fill in New user credentials2")
+    public void fillInNewUserCredentials2() throws Exception {
         homePage.newUserSignUpFormFillingIn();
     }
 

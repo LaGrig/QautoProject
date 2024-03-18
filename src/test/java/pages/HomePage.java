@@ -3,6 +3,8 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.nio.file.Files;
@@ -16,7 +18,7 @@ public class HomePage extends Web {
 
     //Page elements locators
     private final String guestLoginButton = "//button[contains(text(),'Guest')]";
-    private final String userLoginButton = "//button[contains(text(),'Sign In')]";
+    private final String signInButton = "//button[@class='btn btn-outline-white header_signin' and text()='Sign In']";
     protected final String homeButton = "//a [text()='Home']";
     private final String aboutButton = "//button [text()='About']";
     private final String contactsButton = "//button [text()='Contacts']";
@@ -56,37 +58,129 @@ public class HomePage extends Web {
     private final String registerButton = "//button[contains(text(),'Register')]";
 
     //Getters
-    public String getGuestLoginButton() {return guestLoginButton; }
-    public String getUserLoginButton() {return userLoginButton; }
-    public String getHomeButton() { return homeButton;}
-    public String getAboutButton() { return aboutButton; }
-    public String getContactsButton() { return contactsButton; }
-    public String getPageTitle() { return pageTitle; }
-    public String getYouTubeVideo() {  return youTubeVideo;  }
-    public String getSignUpButton() {  return signUpButton;   }
-    public String getAboutPicture1() {  return aboutPicture1;   }
-    public String getAboutPicture2() {  return aboutPicture2;    }
-    public String getHillelPageLink() {   return hillelPageLink;  }
-    public String getHillelEmailLink() {   return hillelEmailLink;   }
-    public String getFaceBook() {  return faceBook;  }
-    public String getTelegram() { return telegram;  }
-    public String getYouTube() {  return youTube;  }
-    public String getInstagram() {   return instagram;  }
-    public String getLinkedIn() {  return linkedIn;  }
-    public String getSignInEmailField() {  return signInEmailField;   }
-    public String getSignInPasswordField() {  return signInPasswordField; }
-    public String getRememberCheckbox() {  return rememberCheckbox;  }
-    public String getButtonCrossToclosePopup() {   return buttonCrossToclosePopup; }
-    public String getToRegistrationLink() {  return toRegistrationLink; }
-    public String getToLoginButton() {   return toLoginButton;  }
-    public String getForgotPasswordLink() {   return forgotPasswordLink; }
-    public String getRegWindowHeader() { return regWindowHeader;}
-    public String getSignUpNameInput() { return signUpNameInput;}
-    public String getSignUpLastnameInput() {return signUpLastnameInput; }
-    public String getSignUpEmailInput() {return signUpEmailInput;}
-    public String getSignUpPasswordInput() {return signUpPasswordInput;}
-    public String getSignUpRePasswordInput() { return signUpRePasswordInput;}
-    public String getRegisterButton() { return registerButton;}
+    public String getGuestLoginButton() {
+        return guestLoginButton;
+    }
+
+    public String getUserSignInButton() {
+        return signInButton;
+    }
+
+    public String getHomeButton() {
+        return homeButton;
+    }
+
+    public String getAboutButton() {
+        return aboutButton;
+    }
+
+    public String getContactsButton() {
+        return contactsButton;
+    }
+
+    public String getPageTitle() {
+        return pageTitle;
+    }
+
+    public String getYouTubeVideo() {
+        return youTubeVideo;
+    }
+
+    public String getSignUpButton() {
+        return signUpButton;
+    }
+
+    public String getAboutPicture1() {
+        return aboutPicture1;
+    }
+
+    public String getAboutPicture2() {
+        return aboutPicture2;
+    }
+
+    public String getHillelPageLink() {
+        return hillelPageLink;
+    }
+
+    public String getHillelEmailLink() {
+        return hillelEmailLink;
+    }
+
+    public String getFaceBook() {
+        return faceBook;
+    }
+
+    public String getTelegram() {
+        return telegram;
+    }
+
+    public String getYouTube() {
+        return youTube;
+    }
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public String getLinkedIn() {
+        return linkedIn;
+    }
+
+    public String getSignInEmailField() {
+        return signInEmailField;
+    }
+
+    public String getSignInPasswordField() {
+        return signInPasswordField;
+    }
+
+    public String getRememberCheckbox() {
+        return rememberCheckbox;
+    }
+
+    public String getButtonCrossToclosePopup() {
+        return buttonCrossToclosePopup;
+    }
+
+    public String getToRegistrationLink() {
+        return toRegistrationLink;
+    }
+
+    public String getToLoginButton() {
+        return toLoginButton;
+    }
+
+    public String getForgotPasswordLink() {
+        return forgotPasswordLink;
+    }
+
+    public String getRegWindowHeader() {
+        return regWindowHeader;
+    }
+
+    public String getSignUpNameInput() {
+        return signUpNameInput;
+    }
+
+    public String getSignUpLastnameInput() {
+        return signUpLastnameInput;
+    }
+
+    public String getSignUpEmailInput() {
+        return signUpEmailInput;
+    }
+
+    public String getSignUpPasswordInput() {
+        return signUpPasswordInput;
+    }
+
+    public String getSignUpRePasswordInput() {
+        return signUpRePasswordInput;
+    }
+
+    public String getRegisterButton() {
+        return registerButton;
+    }
 
     // User predefined credentials
     private final String userEmail = "greg@gmail.com";
@@ -94,10 +188,10 @@ public class HomePage extends Web {
 
     //Other
 
-    public boolean elementsOnPageChecker(){
+    public boolean elementsOnPageChecker() {
         try {
             driver.findElement(By.xpath(guestLoginButton));
-            driver.findElement(By.xpath(userLoginButton));
+            driver.findElement(By.xpath(signInButton));
             driver.findElement(By.xpath(homeButton));
             driver.findElement(By.xpath(aboutButton));
             driver.findElement(By.xpath(contactsButton));
@@ -117,61 +211,92 @@ public class HomePage extends Web {
             return false;
         }
     }
-    public void guestLoginButtonClick(){
+
+    public void guestLoginButtonClick() {
         driver.findElement(By.xpath(guestLoginButton)).click();
     }
 
-    public void signUpButtonClick(){
+    public void signUpButtonClick() {
         driver.findElement(By.xpath(signUpButton)).click();
     }
 
-    public void loginButtonClick(){
-        driver.findElement(By.xpath(toLoginButton)).click();
+    public void signInButtonClick() {
+        driver.findElement(By.xpath(signInButton)).click();
     }
 
-    public void registerButtonClick(){
+    public void loginButtonClick() {
+        driver.findElement(By.xpath(getToLoginButton())).click();
+    }
+
+    public void registerButtonClick() {
         driver.findElement(By.xpath(getRegisterButton())).click();
     }
 
 
-    public void signInFormFilling(){
-        driver.findElement(By.xpath(getUserLoginButton())).click();
+    public void signInFormFilling() {
         driver.findElement(By.xpath(getSignInEmailField())).sendKeys(userEmail);
         driver.findElement(By.xpath(getSignInPasswordField())).sendKeys(userPassword);
     }
 
 
-    private static final String NAMES = "src/test/resources/NamesAndLastnames/Names.csv";
-    private static final String LASTNAMES = "src/test/resources/NamesAndLastnames/Lastnames.csv";
-        public static String getRandomNameFromFile(String fileName) throws Exception {
+    private static final String NAMES = "src/test/resources/Names.csv";
+    private static final String LASTNAMES = "src/test/resources/Lastnames.csv";
+
+    public static String getRandomNameFromFile(String fileName) {
+        try {
             List<String> lines = Files.readAllLines(Paths.get(fileName));
             Random random = new Random();
             return lines.get(random.nextInt(lines.size()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
+    }
 
-    public String newUserName() throws Exception {
+    public String newUserName() {
         return getRandomNameFromFile(NAMES);
     }
 
-    public String newUserLastame() throws Exception {
+    public String newUserLastname() {
         return getRandomNameFromFile(LASTNAMES);
     }
-    public void newUserSignUpFormFillingIn() throws Exception {
-        long timestamp = System.currentTimeMillis();
 
+    public void newUserSignUpFormFillingIn() {
+        try {
+            long timestamp = System.currentTimeMillis();
+            String password = "Qwerty123";
+            String name = newUserName();
+            String lastname = newUserLastname();
+
+            signUpButtonClick();
+            driver.findElement(By.xpath(signUpNameInput)).sendKeys(name);
+            driver.findElement(By.xpath(getSignUpLastnameInput())).sendKeys(lastname);
+            driver.findElement(By.xpath(getSignUpEmailInput())).sendKeys(name + timestamp + "@gmail.com");
+            driver.findElement(By.xpath(getSignUpPasswordInput())).sendKeys(password);
+            driver.findElement(By.xpath(getSignUpRePasswordInput())).sendKeys(password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void newUserSignUpFormFillingIn2() {
+        long timestamp = System.currentTimeMillis();
         String password = "Qwerty123";
-        driver.findElement(By.xpath(getSignUpButton())).click();
-        driver.findElement(By.xpath(getSignUpNameInput())).sendKeys(newUserName());
-        driver.findElement(By.xpath(getSignUpLastnameInput())).sendKeys(newUserLastame());
-        driver.findElement(By.xpath(getSignUpEmailInput())).sendKeys(newUserName() + timestamp + "@gmail.com");
+        String name = "John";
+        String lastname = "Doe";
+
+        driver.findElement(By.xpath(signUpNameInput)).sendKeys(name);
+        driver.findElement(By.xpath(getSignUpLastnameInput())).sendKeys(lastname);
+        driver.findElement(By.xpath(getSignUpEmailInput())).sendKeys(name + timestamp + "@gmail.com");
         driver.findElement(By.xpath(getSignUpPasswordInput())).sendKeys(password);
         driver.findElement(By.xpath(getSignUpRePasswordInput())).sendKeys(password);
     }
 
+
     //НАДО БУДЕТ ПО ХОРОШЕМУ ПЕРЕНЕСТИ В ДРУГУЮ СТРАНИЦУ ЭТОТ МЕТОД
     // - ПРОВЕРКА НА ТРАНИЦЕ ПРОФИЛЯ НАЛИЧИЯ ИМЕНИ И ФАМИЛИИ
     public void userProfileNameAndLastnameChecker() throws Exception {
-        String expectedName = newUserName() + " " + newUserLastame();
+        String expectedName = newUserName() + " " + newUserLastname();
         WebElement element = driver.findElement(By.xpath("//p[@class='profile_name display-4' and text()='" + expectedName + "']"));
         Assert.assertEquals(expectedName, element);
     }

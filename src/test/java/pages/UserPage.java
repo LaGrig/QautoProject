@@ -43,8 +43,10 @@ public class UserPage extends Web{
     public String getLogOutDropdownButton() { return logOutDropdownButton;}
     public String getSidebarSettingsLink() { return sidebarSettingsLink;}
 
-    public void loginAsGuestAndCheckPresentTabs(){
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(loggedInAsGuestNotifier)));
+    public void loginAsGuestAndCheckPresentTabs() throws InterruptedException {
+        //Thread.sleep(2000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(getLoggedInAsGuestNotifier())));
+        Assert.assertTrue(driver.findElement(By.xpath(getLoggedInAsGuestNotifier())).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath(getHeaderGarageLink())).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath(getSidebarGarageLink())).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath(getSidebarExpensesLink())).isDisplayed());
@@ -60,7 +62,9 @@ public class UserPage extends Web{
         Assert.assertTrue(profileLinks.isEmpty());
     }
 
-    public void loginAsUserAndCheckPresentTabs(){
+    public void loginAsUserAndCheckPresentTabs() throws InterruptedException {
+        Thread.sleep(5000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(getSidebarGarageLink())));
         Assert.assertTrue(driver.findElement(By.xpath(getSidebarGarageLink())).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath(getSidebarExpensesLink())).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath(getHeaderExpensesLink())).isDisplayed());
