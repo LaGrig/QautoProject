@@ -110,5 +110,28 @@ public class MyStepdefs extends Pages {
     public void checkIfILoggedInAsUser() throws InterruptedException {
         userPage.userProfileNameCheck();
     }
+
+    @Given("I login as registered User")
+    public void iLoginAsRegisteredUser() {
+        homePage.goToHomePage();
+        homePage.signInButtonClick();
+        homePage.signInFormFilling();
+        homePage.loginButtonClick();
+    }
+
+    @When("Press add car button")
+    public void pressAddCarButton() throws InterruptedException {
+        garagePage.addCarButtonClick();
+    }
+
+    @And("Fill in car data form")
+    public void fillInCarDataForm() throws InterruptedException {
+        garagePage.fillInCarAddCarForm();
+    }
+
+    @Then("Check car added")
+    public void checkCarAdded() {
+        garagePage.checkAddedCarIsDisplayedAndRemoveIt();
+    }
 }
 

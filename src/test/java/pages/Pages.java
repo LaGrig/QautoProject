@@ -5,4 +5,5 @@ public class Pages {
     protected UserPage userPage = new UserPage();
     protected Web web = new Web();
     protected ProfilePage profilePage = new ProfilePage();
+    protected GaragePage garagePage = new GaragePage();
 }

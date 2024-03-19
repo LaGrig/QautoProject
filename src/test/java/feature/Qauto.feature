@@ -1,8 +1,10 @@
 Feature: Homepage feature
 
+
   Scenario: 1 Verify Home page opens fine
     Given I navigate to the Home page
     Then Check if current URL is HomePage URL
+
 
   Scenario: 2 Check if all page elements on Home page are presents
     Given I navigate to the Home page
@@ -15,7 +17,7 @@ Feature: Homepage feature
     Then Check if I logged in as Guest
     Then User logout and Home Page Url check
 
-      #Не работает проверка элементов на странице
+
   Scenario: 4 Check if login and logout as Registered User is possible
     Given I navigate to the Home page
     When Click on Sign in button
@@ -32,3 +34,11 @@ Feature: Homepage feature
     And Click Register button
     Then Check if current URL is UserPage-Garage URL
     And Profile User name is present on Profile page
+
+  Scenario: 6 Garage add car possibility check
+    Given I login as registered User
+    When Press add car button
+    And Fill in car data form
+    Then Check car added
+
+
