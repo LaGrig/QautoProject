@@ -1,4 +1,4 @@
-package pages;
+package pagesUI;
 
 public class Pages {
     protected HomePage homePage = new HomePage();
@@ -6,4 +6,5 @@ public class Pages {
     protected Web web = new Web();
     protected ProfilePage profilePage = new ProfilePage();
     protected GaragePage garagePage = new GaragePage();
+    protected FuelExpensesPage fuelExpensesPage = new FuelExpensesPage();
 }

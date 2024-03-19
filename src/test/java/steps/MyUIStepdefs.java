@@ -6,16 +6,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import pages.Pages;
-import pages.Web;
+import pagesUI.Pages;
+import pagesUI.Web;
 
-public class MyStepdefs extends Pages {
+public class MyUIStepdefs extends Pages {
 
     @Before
-    public void chromeSetup() {
-        web.setup();
-    }
+    public void chromeSetup() {  web.setup(); }
 
     @After
     public void chromeDriverQuit(){
@@ -149,6 +146,23 @@ public class MyStepdefs extends Pages {
     @Then("Remove last added car")
     public void removeLastAddedCar() {
         garagePage.removeLastAddedCar();
+    }
+
+    @Then("Go to Fuel expenses page")
+    public void goToFuelExpensesPage() {
+        web.goToFuelExpensesPage();
+    }
+
+    @And("Add Fuel expenses to car added")
+    public void addFuelExpensesToCarAdded() throws InterruptedException {
+        Thread.sleep(1000);
+        fuelExpensesPage.addFuelExpensesButtonClick();
+        fuelExpensesPage.addExpensesPopUpWindowFillIn();
+    }
+
+    @And("Add new car to check expenses")
+    public void addNewCarToCheckExpenses() throws InterruptedException {
+        garagePage.addFiatScudo();
     }
 }
 

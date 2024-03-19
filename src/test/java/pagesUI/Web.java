@@ -1,4 +1,4 @@
-package pages;
+package pagesUI;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +15,8 @@ public class Web {
 
     public static final String homePageUrl = "https://guest:welcome2qauto@qauto.forstudy.space/";
     public static final String garagePageUrl = "https://guest:welcome2qauto@qauto.forstudy.space/panel/garage";
+    public static final String fuelExpensesPageUrl = "https://guest:welcome2qauto@qauto.forstudy.space/panel/expenses";
+
 
     public String getCurrentWebAddress() {
         return driver.getCurrentUrl();
@@ -40,5 +42,9 @@ public class Web {
 
     public void goToHomePage(){
         driver.get(homePageUrl);
+    }
+
+    public void goToFuelExpensesPage(){
+        driver.get(fuelExpensesPageUrl);
     }
 }

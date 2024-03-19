@@ -44,12 +44,17 @@ Feature: UI features
 
   Scenario: 7 Check car data update
     Given I login as registered User
-    When Press add car button
     And Add new car
     Then Update car data
     Then Remove last added car
 
 
-  Scenario: 8
+  Scenario: 8 Check Fuel expenses apply
+    Given I login as registered User
+    And Add new car to check expenses
+    Then Go to Fuel expenses page
+    And Add Fuel expenses to car added
+
+
 
 

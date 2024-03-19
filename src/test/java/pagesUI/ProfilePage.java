@@ -1,4 +1,4 @@
-package pages;
+package pagesUI;
 
 import org.openqa.selenium.By;
 
