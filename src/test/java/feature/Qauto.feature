@@ -1,5 +1,4 @@
-Feature: Homepage feature
-
+Feature: UI features
 
   Scenario: 1 Verify Home page opens fine
     Given I navigate to the Home page
@@ -35,10 +34,22 @@ Feature: Homepage feature
     Then Check if current URL is UserPage-Garage URL
     And Profile User name is present on Profile page
 
+
   Scenario: 6 Garage add car possibility check
     Given I login as registered User
     When Press add car button
     And Fill in car data form
     Then Check car added
+
+
+  Scenario: 7 Check car data update
+    Given I login as registered User
+    When Press add car button
+    And Add new car
+    Then Update car data
+    Then Remove last added car
+
+
+  Scenario: 8
 
 

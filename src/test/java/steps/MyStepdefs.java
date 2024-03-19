@@ -127,11 +127,28 @@ public class MyStepdefs extends Pages {
     @And("Fill in car data form")
     public void fillInCarDataForm() throws InterruptedException {
         garagePage.fillInCarAddCarForm();
+
     }
 
     @Then("Check car added")
-    public void checkCarAdded() {
+    public void checkCarAdded() throws InterruptedException {
         garagePage.checkAddedCarIsDisplayedAndRemoveIt();
+    }
+
+    @And("Add new car")
+    public void addNewCar() throws InterruptedException {
+        garagePage.fillInCarAddCarForm();
+    }
+
+    @Then("Update car data")
+    public void updateCarData() throws InterruptedException {
+        garagePage.updateCarData();
+        garagePage.checkFordFocusIsDisplayed();
+    }
+
+    @Then("Remove last added car")
+    public void removeLastAddedCar() {
+        garagePage.removeLastAddedCar();
     }
 }
 
