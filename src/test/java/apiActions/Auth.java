@@ -77,7 +77,5 @@ public class Auth extends GlobalSettings {
         Response response = client.newCall(request).execute();
         String responseBody = response.body().string();
         Assert.assertEquals(responseBody,"{\"status\":\"ok\"}");
-        assert response.body() != null;
-        System.out.println(response.body().string());
     }
 }
