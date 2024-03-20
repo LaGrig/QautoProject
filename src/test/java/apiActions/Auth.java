@@ -6,28 +6,27 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.json.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
 
 import java.io.IOException;
 
-public class Auth extends GlobalSettings{
+public class Auth extends GlobalSettings {
 
-        String name = RandomStringUtils.randomAlphabetic(10);
-        String surname = RandomStringUtils.randomAlphabetic(10);
+    String name = RandomStringUtils.randomAlphabetic(5).toLowerCase();
+    String surname = RandomStringUtils.randomAlphabetic(5).toLowerCase();
 
-    public Auth() throws IOException {
-    }
-
-@Test
     public void registerNewUser() throws IOException {
-        final String endpointName = "/aith/signin";
+        final String endpointName = "/auth/signup";
         String url = baseUrl + endpointName;
 
         String addUser =
                 "{\n" +
-                        "\"name\": \"John\",\n" +
-                        "\"lastName\": \"Dou\",\n" +
-                        "\"email\": \"test@test.com\",\n" +
+                        "\"name\": \"" + name + "\",\n" +
+                        "\"lastName\": \"" + surname + "\",\n" +
+                        "\"email\": \"" + name + "@" + surname + ".com\",\n" +
                         "\"password\": \"Qwerty12345\",\n" +
                         "\"repeatPassword\": \"Qwerty12345\"\n" +
                         "}";
@@ -39,20 +38,46 @@ public class Auth extends GlobalSettings{
                 .method("POST", body)
                 .build();
         Response response = client.newCall(request).execute();
+        assert response.body() != null;
         System.out.println(response.body().string());
     }
 
-    public void registerMoreNewUser() throws IOException {
-    MediaType mediaType = MediaType.parse("application/json");
-    RequestBody body = RequestBody.create(mediaType, "{\n  \"email\": \"test@test.com\",\n  \"password\": \"Qwerty12345\",\n  \"remember\": false\n}");
-    Request request = new Request.Builder()
-            .url("http://your-api-endpoint.com")
-            .post(body)
-            .addHeader("Content-Type", "application/json")
-            .build();
+    public void loginNewUser() throws IOException {
+        final String endpointName = "/auth/signin";
+        String url = baseUrl + endpointName;
 
-    Response response = client.newCall(request).execute();
+        String addUser =
+                "{\n" +
+                        "\"email\": \"" + name + "@" + surname + ".com\",\n" +
+                        "\"password\": \"Qwerty12345\",\n" +
+                        "\"remember\": \"false\"\n" +
+                        "}";
+
+        RequestBody body = RequestBody.create(addUser, MediaType.get("application/json"));
+        Request request = new Request.Builder()
+                .url(url)
+                .header("accept", "*/*")
+                .method("POST", body)
+                .build();
+        Response response = client.newCall(request).execute();
+        assert response.body() != null;
         System.out.println(response.body().string());
-}
+    }
 
+    public void logOutNewUser() throws IOException {
+
+        final String endpointName = "/auth/logout";
+        String url = baseUrl + endpointName;
+
+        Request request = new Request.Builder()
+                .url(url)
+                .header("accept", "*/*")
+                .method("GET", null)
+                .build();
+        Response response = client.newCall(request).execute();
+        String responseBody = response.body().string();
+        Assert.assertEquals(responseBody,"{\"status\":\"ok\"}");
+        assert response.body() != null;
+        System.out.println(response.body().string());
+    }
 }
