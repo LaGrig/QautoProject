@@ -1,4 +1,4 @@
-package apiActions;
+package org.apiActions;
 
 import okhttp3.OkHttpClient;
 

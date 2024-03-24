@@ -1,4 +1,4 @@
-package pagesUI;
+package org.pagesUI;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -35,7 +35,7 @@ public class FuelExpensesPage extends Web {
     Random rand = new Random();
     int mileage = rand.nextInt(500) + 1;
     int liters = rand.nextInt(60) + 1;
-    double cost = rand.nextDouble(300.00) + 20.00;
+    double cost = rand.nextDouble() * 300.00 + 20.00;
 
     public void addFuelExpensesButtonClick() {
         driver.findElement(By.xpath(addExpensesButton)).click();

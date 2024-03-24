@@ -1,9 +1,10 @@
-package pagesUI;
+package org.pagesUI;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,7 +23,7 @@ public class HomePage extends Web {
     private final String contactsButton = "//button [text()='Contacts']";
     private final String pageTitle = "//h1[contains(text(),'Do more!')]";
     private final String youTubeVideo = "//iframe[@src='https://www.youtube.com/embed/TLP8v7WTlSM?showinfo=0&controls=0']";
-    private final String signUpButton = "//button [@class='hero-descriptor_btn btn btn-primary' and contains(text(),'Sign up')]";
+    private final String signUpButton = "//button [text()='Sign up']";
     private final String aboutPicture1 = "//*[@alt='Instructions' and @src='/assets/images/homepage/info_1.jpg']";
     private final String aboutPicture2 = "//*[@alt='Instructions' and @src='/assets/images/homepage/info_2.jpg']";
 
@@ -237,8 +238,8 @@ public class HomePage extends Web {
     }
 
 
-    private static final String NAMES = "src/test/resources/Names.csv";
-    private static final String LASTNAMES = "src/test/resources/Lastnames.csv";
+    private static final String NAMES = "Names.csv";
+    private static final String LASTNAMES = "Lastnames.csv";
 
     public static String getRandomNameFromFile(String fileName) {
         try {
@@ -251,9 +252,7 @@ public class HomePage extends Web {
         }
     }
 
-    public String newUserName() {
-        return getRandomNameFromFile(NAMES);
-    }
+    public String newUserName() { return getRandomNameFromFile(NAMES); }
 
     public String newUserLastname() {
         return getRandomNameFromFile(LASTNAMES);
@@ -261,14 +260,14 @@ public class HomePage extends Web {
 
     public void newUserSignUpFormFillingIn() {
         try {
-            long timestamp = System.currentTimeMillis();
+           long timestamp = System.currentTimeMillis();
             String password = "Qwerty123";
             String name = newUserName();
             String lastname = newUserLastname();
 
             signUpButtonClick();
-            driver.findElement(By.xpath(signUpNameInput)).sendKeys(name);
-            driver.findElement(By.xpath(getSignUpLastnameInput())).sendKeys(lastname);
+            driver.findElement(By.xpath(signUpNameInput)).sendKeys(NAMES);
+            driver.findElement(By.xpath(getSignUpLastnameInput())).sendKeys(LASTNAMES);
             driver.findElement(By.xpath(getSignUpEmailInput())).sendKeys(name + timestamp + "@gmail.com");
             driver.findElement(By.xpath(getSignUpPasswordInput())).sendKeys(password);
             driver.findElement(By.xpath(getSignUpRePasswordInput())).sendKeys(password);
@@ -292,7 +291,7 @@ public class HomePage extends Web {
 
 
     //НАДО БУДЕТ ПО ХОРОШЕМУ ПЕРЕНЕСТИ В ДРУГУЮ СТРАНИЦУ ЭТОТ МЕТОД
-    // - ПРОВЕРКА НА ТРАНИЦЕ ПРОФИЛЯ НАЛИЧИЯ ИМЕНИ И ФАМИЛИИ
+    // - ПРОВЕРКА НА СТРАНИЦЕ ПРОФИЛЯ НАЛИЧИЯ ИМЕНИ И ФАМИЛИИ
     public void userProfileNameAndLastnameChecker() throws Exception {
         String expectedName = newUserName() + " " + newUserLastname();
         WebElement element = driver.findElement(By.xpath("//p[@class='profile_name display-4' and text()='" + expectedName + "']"));

@@ -1,4 +1,4 @@
-package pagesUI;
+package org.pagesUI;
 
 public class Pages {
     protected HomePage homePage = new HomePage();

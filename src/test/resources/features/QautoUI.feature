@@ -29,7 +29,7 @@ Feature: UI features
   Scenario: 5 Check New User registration
     Given I navigate to the Home page
     When Click on SingUp button
-    And Fill in New user credentials2
+    And Fill in New user credentials
     And Click Register button
     Then Check if current URL is UserPage-Garage URL
     And Profile User name is present on Profile page

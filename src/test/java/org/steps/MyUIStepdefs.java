@@ -1,4 +1,4 @@
-package steps;
+package org.steps;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -6,8 +6,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pagesUI.Pages;
-import pagesUI.Web;
+import org.pagesUI.Pages;
+import org.pagesUI.Web;
+
 
 public class MyUIStepdefs extends Pages {
 
