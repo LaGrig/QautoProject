@@ -2,12 +2,16 @@ package org.pagesUI;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GaragePage extends Web{
+    //private static final Logger logger = Logger.getLogger(GaragePage.class.getName());
     private final String addCarButton = "//*[@class='btn btn-primary' and text()='Add car']";
     private final String addCarFormBrandDropdown = "//*[@id='addCarBrand']";
     private final String addCarFormModelDropdown = "//*[@id='addCarModel']";
@@ -21,15 +25,18 @@ public class GaragePage extends Web{
     private final String removeCarConfirmButton = "//button [@type='button' and text()='Remove']";
     private final String saveCarEditForm = "/html/body/ngb-modal-window/div/div/app-edit-car-modal/div[3]/div/button[2]";
 
-
     Random rand = new Random();
     int mileage = rand.nextInt(99999) + 1;
+
     public void addCarButtonClick() throws InterruptedException {
+
         Thread.sleep(1000);
         driver.findElement(By.xpath(addCarButton)).click();
+        logger.log(Level.INFO, "Click on Add car button");
     }
 
     public void fillInCarAddCarForm() throws InterruptedException {
+
         Thread.sleep(1000);
         driver.findElement(By.xpath(addCarButton)).click();
 
@@ -48,9 +55,11 @@ public class GaragePage extends Web{
 
         WebElement addCarFormButton = driver.findElement(By.xpath(addCarFormAddButton));
         addCarFormButton.click();
+        logger.log(Level.INFO, "Car add for filling in");
     }
 
     public void addFiatScudo() throws InterruptedException {
+
         Thread.sleep(1000);
         driver.findElement(By.xpath(addCarButton)).click();
 
@@ -69,6 +78,7 @@ public class GaragePage extends Web{
 
         WebElement addCarFormButton = driver.findElement(By.xpath(addCarFormAddButton));
         addCarFormButton.click();
+        logger.log(Level.INFO, "Add Fiat Scudo car");
     }
 
     public void checkAddedCarIsDisplayedAndRemoveIt() throws InterruptedException {
@@ -82,17 +92,21 @@ public class GaragePage extends Web{
     public void checkBMWX6IsDisplayed() throws InterruptedException {
         Thread.sleep(2000);
         Assert.assertTrue(driver.findElement(By.xpath(BMWX6onPage)).isDisplayed());
+        logger.log(Level.INFO, "Check if BMW X6 is displayed");
     }
 
     public void checkFordFocusIsDisplayed() throws InterruptedException {
         Thread.sleep(2000);
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(fordFocusOnPage)));
         Assert.assertTrue(driver.findElement(By.xpath(fordFocusOnPage)).isDisplayed());
+        logger.log(Level.INFO, "Check if Ford Focus is displayed");
     }
 
     public void removeLastAddedCar(){
         driver.findElement(By.xpath(topCarInTheRowEditButton)).click();
         driver.findElement(By.xpath(removeCarButton)).click();
         driver.findElement(By.xpath(removeCarConfirmButton)).click();
+        logger.log(Level.INFO, "Remove top car in the list");
     }
 
     public void updateCarData() throws InterruptedException {
@@ -113,5 +127,6 @@ public class GaragePage extends Web{
         mileageInput.sendKeys(String.valueOf(mileage));
 
         driver.findElement(By.xpath(saveCarEditForm)).click();
+        logger.log(Level.INFO, "Update car data");
     }
 }

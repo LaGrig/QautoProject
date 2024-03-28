@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class CarsActions extends GlobalSettings{
 
@@ -22,6 +23,7 @@ public class CarsActions extends GlobalSettings{
                 .header("accept", "*/*")
                 .method("GET", null)
                 .build();
+        logger.log(Level.INFO, "Api request to get all car brands");
         Response response = client.newCall(request).execute();
         Assert.assertEquals(response.body().string(),"{\"status\":\"ok\",\"data\":" +
                 "[{\"id\":1,\"title\":\"Audi\",\"logoFilename\":\"audi.png\"}," +
@@ -48,6 +50,7 @@ public class CarsActions extends GlobalSettings{
                 .header("accept", "*/*")
                 .method("POST", body)
                 .build();
+        logger.log(Level.INFO, "Api request to add new car");
         Response response = client.newCall(request).execute();
         assert response.body() != null;
         String responseBody = response.body().string();
@@ -73,6 +76,7 @@ public class CarsActions extends GlobalSettings{
                 .header("accept", "*/*")
                 .method("POST", body)
                 .build();
+        logger.log(Level.INFO, "Api request to add new car");
         Response response = client.newCall(request).execute();
         String responseBody = response.body().string();
 
@@ -97,6 +101,7 @@ public class CarsActions extends GlobalSettings{
                 .header("accept", "*/*")
                 .method("DELETE", null)
                 .build();
+        logger.log(Level.INFO, "Api request to delete car");
         Response response = client.newCall(request).execute();
         String responseBody = response.body().string();
         Assert.assertEquals(responseBody,"{\"status\":\"ok\"}");

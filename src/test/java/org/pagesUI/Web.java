@@ -8,9 +8,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.logging.Logger;
 
 public class Web {
     public static WebDriver driver;
+    protected final Logger logger = Logger.getLogger(Web.class.getName());
+
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
     public static final String homePageUrl = "https://guest:welcome2qauto@qauto.forstudy.space/";

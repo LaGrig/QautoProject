@@ -9,13 +9,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.testng.Assert;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Auth extends GlobalSettings {
-
+    private static Logger logger;
     String name = RandomStringUtils.randomAlphabetic(8).toLowerCase();
     String surname = RandomStringUtils.randomAlphabetic(8).toLowerCase();
 
     public void registerNewUser() throws IOException {
+        logger.log(Level.INFO, "Api request to signup");
         final String endpointName = "/auth/signup";
         String url = baseUrl + endpointName;
 
@@ -40,6 +43,7 @@ public class Auth extends GlobalSettings {
     }
 
     public void loginNewUser() throws IOException {
+        logger.log(Level.INFO, "Api request to signin");
         final String endpointName = "/auth/signin";
         String url = baseUrl + endpointName;
 
@@ -62,7 +66,7 @@ public class Auth extends GlobalSettings {
     }
 
     public void logOutNewUser() throws IOException {
-
+        logger.log(Level.INFO, "Api request to logout");
         final String endpointName = "/auth/logout";
         String url = baseUrl + endpointName;
 
@@ -71,12 +75,14 @@ public class Auth extends GlobalSettings {
                 .header("accept", "*/*")
                 .method("GET", null)
                 .build();
+
         Response response = client.newCall(request).execute();
         String responseBody = response.body().string();
         Assert.assertEquals(responseBody,"{\"status\":\"ok\"}");
     }
 
     public void loginAsAlreadyRegisteredUser() throws IOException {
+        logger.log(Level.INFO, "Api request to to login as already registetred user");
         final String endpointName = "/auth/signin";
         String url = baseUrl + endpointName;
 

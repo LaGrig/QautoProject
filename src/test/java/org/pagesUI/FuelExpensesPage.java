@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.Select;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FuelExpensesPage extends Web {
 
@@ -42,12 +44,14 @@ public class FuelExpensesPage extends Web {
     }
 
     public void changeDropdownToFiatScudo(){
+        logger.log(Level.INFO, "Change car in dropdown window");
         WebElement dropDown = driver.findElement(By.xpath(carSelectorDropDown));
         Select selectModel = new Select(dropDown);
         selectModel.selectByValue("Fiat Scudo");
     }
 
     public void addExpensesPopUpWindowFillIn() throws InterruptedException {
+        logger.log(Level.INFO, "Expenses window popup filling in");
         Thread.sleep(1000);
         //WebElement carSelector = driver.findElement(By.xpath(addExpensesCarSelectorDropDown));
         WebElement calendar = driver.findElement(By.xpath(addExpensesCalendar));
@@ -65,5 +69,6 @@ public class FuelExpensesPage extends Web {
         addLiters.sendKeys(String.valueOf(liters));
         addCost.sendKeys(String.valueOf(cost));
         addButton.click();
+
     }
 }

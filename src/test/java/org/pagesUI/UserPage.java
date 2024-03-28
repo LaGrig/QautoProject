@@ -5,9 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class UserPage extends Web{
-
+    private static Logger logger;
     //Locators
     //Page objects locators
     public static final String loggedInAsGuestNotifier = "//* [@class='header_bar' and text()='Logged in as guest, any changes will be lost!']";

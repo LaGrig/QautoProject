@@ -4,14 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 public class HomePage extends Web {
+    private static Logger logger;
 
     //Variables are in CamelCase (not Capital) because there is same style is applied at my work project
 
@@ -55,6 +56,7 @@ public class HomePage extends Web {
     private final String signUpPasswordInput = "//input [@id='signupPassword']";
     private final String signUpRePasswordInput = "//input[@id='signupRepeatPassword']";
     private final String registerButton = "//button[contains(text(),'Register')]";
+
 
     //Getters
     public String getGuestLoginButton() {
@@ -187,6 +189,7 @@ public class HomePage extends Web {
 
     //Other
 
+
     public boolean elementsOnPageChecker() {
         try {
             driver.findElement(By.xpath(guestLoginButton));
@@ -238,8 +241,8 @@ public class HomePage extends Web {
     }
 
 
-    private static final String NAMES = "Names.csv";
-    private static final String LASTNAMES = "Lastnames.csv";
+    private static final String NAMES = "src/test/resources/files/Names.csv";
+    private static final String LASTNAMES = "src/test/resources/files/Lastnames.csv";
 
     public static String getRandomNameFromFile(String fileName) {
         try {
@@ -258,7 +261,7 @@ public class HomePage extends Web {
         return getRandomNameFromFile(LASTNAMES);
     }
 
-    public void newUserSignUpFormFillingIn() {
+    public void newUserSignUpFormFillingIn2() {
         try {
            long timestamp = System.currentTimeMillis();
             String password = "Qwerty123";
@@ -276,7 +279,7 @@ public class HomePage extends Web {
         }
     }
 
-    public void newUserSignUpFormFillingIn2() {
+    public void newUserSignUpFormFillingIn() {
         long timestamp = System.currentTimeMillis();
         String password = "Qwerty123";
         String name = "John";

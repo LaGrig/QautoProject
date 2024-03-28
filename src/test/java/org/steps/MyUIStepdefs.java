@@ -20,7 +20,7 @@ public class MyUIStepdefs extends Pages {
         web.closeBrowser();
     }
 
-    @Given("I navigate to the Home page")
+    @Given("Navigate to the Home page")
     public void iNavigateToTheHomePage() {
         web.goToHomePage();
     }

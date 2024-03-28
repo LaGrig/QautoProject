@@ -1,5 +1,7 @@
 package org.pagesUI;
 
+import java.util.logging.Logger;
+
 public class Pages {
     protected HomePage homePage = new HomePage();
     protected UserPage userPage = new UserPage();

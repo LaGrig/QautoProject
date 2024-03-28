@@ -5,6 +5,7 @@ import okhttp3.Response;
 import org.testng.Assert;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class UserDataPage extends GlobalSettings{
 
@@ -17,6 +18,7 @@ public class UserDataPage extends GlobalSettings{
                 .header("accept", "*/*")
                 .method("GET", null)
                 .build();
+        logger.log(Level.INFO, "Api request to get user profile data");
         Response response = client.newCall(request).execute();
         String responseBody = response.body().string();
         Assert.assertEquals(responseBody,"{\n" +
